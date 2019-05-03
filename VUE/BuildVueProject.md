@@ -131,3 +131,19 @@
 ## 一些坑
 * methods中的方法不要使用箭头函数定义，因为其this作用域会出错。即不可使用a:()=>{},也不可使用a(){},仅可用a:function(){} ,[details](https://cn.vuejs.org/v2/api/#methods)
 * 监听鼠标悬停事件时，原生事件是mouseover而不是hover
+
+## vue文件中的注释
+* html:<!--   -->
+* css,stylus,js: //   /*  */
+
+## vue操作样式style
+* 对象方式：`:class="{'openPhoto':isShowInfo}"`，花括号内是键值对的样式名：bool值
+* 数组方式`:class="[class1,class2]"`,方括号内是字符串组成的数组
+
+## vue事件
+* vue监听事件时，需要使用event，参数写作$event.`@mouseout="handleOut($event)"`
+
+## 处理大量图片的懒加载，预加载
+## html模板引擎的意义
+## nginx反向代理
+## nodejs前后端分离项目部署

@@ -1,8 +1,7 @@
 # CSS笔记
 
 ## 设计css时考虑的思路
-* 考虑 文档流，即是否浮动，行内块，还是static
-* 考虑 定位，相对，绝对，固定
+
 ## border
 * border-width
 * border-style
@@ -76,6 +75,12 @@
 * 其只能决定父容器中，同级子元素的堆叠顺序
 * z-index的值不能带px，否则无效
 
+## css属性选项
+* cursor属性
+	* pointer,手指
+
 # 怎样画出好看的边框
 
-# CSS动画效果设计
+# CSS动画与过度
+* transition:
+* display与Transition的冲突

@@ -55,8 +55,8 @@
 * 配置storeConfig对象：
 	* state：数据库
 	* action：异步
-	* mutation：修改state的唯一接口
-	* getter：获取依赖state的数据
+	* mutation：修改state的唯一接口,内部方法参数：(state,data)
+	* getter：获取依赖state的数据,内部方法参数：(context,data)
 * 实例化store对象` const store=new Vuex.Store(storeConfig)`
 * 在Vue顶级实例中注册
 
@@ -78,6 +78,9 @@
 ## import 路径问题
 * 相对路径
 * 使用@
+
+## export使用
+* export/export default后面跟随的必须是一个{}包围的对象，不可以直接export a，需要export {a}
 
 ## publicpath公式
 * 静态资源最终访问路径 = output.publicPath + 资源loader或插件等配置路径
@@ -131,6 +134,12 @@
 ## 一些坑
 * methods中的方法不要使用箭头函数定义，因为其this作用域会出错。即不可使用a:()=>{},也不可使用a(){},仅可用a:function(){} ,[details](https://cn.vuejs.org/v2/api/#methods)
 * 监听鼠标悬停事件时，原生事件是mouseover而不是hover
+* vue为每个组件的css的class，id都添加hash值，保证仅组件内生效，一个组件的多个实例，他们的hash是相同的。
+* vuex的state，在组件中使用时需要用computed而不是data
+	* [detail](https://segmentfault.com/q/1010000009696383)
+	* data引用store.state.info,当info变化时，data作为引用，并没有发生变化，并不会追踪依赖。
+	* computed会追踪依赖，检测到其引用的数据本体变化时，则会触发重新计算。
+	* 那data设计的职责是什么？它的设计目标就是保存组件的局部状态数据而已
 
 ## vue文件中的注释
 * html:<!--   -->
@@ -143,7 +152,55 @@
 ## vue事件
 * vue监听事件时，需要使用event，参数写作$event.`@mouseout="handleOut($event)"`
 
-## 处理大量图片的懒加载，预加载
+## 处理大量图片的懒加载lazy load，预加载
+* lazy load
+	* 自己实现
+		* data-src
+	* vue库
 ## html模板引擎的意义
 ## nginx反向代理
 ## nodejs前后端分离项目部署
+
+## vuex异步
+* [detail](https://vuex.vuejs.org/zh/guide/actions.html)
+* vue的action负责异步方法
+* action并非直接改变state，而实通过提交mutation。
+	* `context.commit('pushCollects',item);`
+	* 函数接受一个与 store 实例具有相同方法和属性的 context 对象
+* 触发action中的方法
+	* `store.dispatch("AsyncAction")`
+* 异步处理
+	* 有异步，必然有操作是需要异步完成后，才进行
+	* store.dispatch 可以处理被触发的 action 的处理函数返回的 Promise，并且 store.dispatch 仍旧返回 Promise：
+	* 首先，vuex action的异步函数，需要`return new promise(AsyncFuncFromApi)`
+	* 在其他组件中调用：`$store.dispatch('actionA').then()`
+	* dispatch中可以触发多个异步，当全部异步完成后，才会执行回调
+
+## vuex使用的api设计
+* 参数设计：
+	* url
+	* param
+	* success backfunc:用于异步操作成功后执行，异步操作完成后必然提供数据，
+	* failure backfunc
+* 异步操作中
+	* 回调地狱没有返回值，是通过回调函数操作数据
+	* 使用promise有返回值，返回一个promise的对象，传递的数据通过resolve（data),then(data=>log(data))获取
+* 一个异步操作的嵌套调用
+* 多个异步操作（有顺序）的[嵌套调用](https://www.cnblogs.com/momozjm/p/8603007.html)
+
+## vue生命周期与异步获取数据加载
+* 生命周期
+	* BeforeCreate 无数据，无dom
+	* created	无数据，无dom
+	* BeforeMount
+	* mounted	挂载dom完毕
+	* beforeUpdate
+	* updated
+	* beforeDestory
+	* destoryed
+* 异步获取数据放在哪个生命周期合理?
+* [detail](https://blog.csdn.net/weixin_34050005/article/details/87964047)
+	* 异步函数跟同步函数的不同之处，最大的应该就是异步函数会等到所有同步函数执行完成之后再执行
+	* 因此，生命周期执行完成后，才会执行异步操作
+	* 放在created阶段即可，需要将生命周期用到的数据初始化，防止undefined。注意获取的数据不可放在组件的data，因为此时data并未加载
+	* 必然出现，vue需要renderdom但是当前却没有data

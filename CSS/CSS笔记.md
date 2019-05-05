@@ -79,8 +79,15 @@
 * cursor属性
 	* pointer,手指
 
-# 怎样画出好看的边框
+## 怎样画出好看的边框
 
-# CSS动画与过度
+## CSS动画与过度
 * transition:
 * display与Transition的冲突
+
+## 制作光圈散开的提示效果
+
+## ::after使用情景
+
+
+## 图片框组件设计：截取类，缩略类

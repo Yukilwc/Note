@@ -204,3 +204,7 @@
 	* 因此，生命周期执行完成后，才会执行异步操作
 	* 放在created阶段即可，需要将生命周期用到的数据初始化，防止undefined。注意获取的数据不可放在组件的data，因为此时data并未加载
 	* 必然出现，vue需要renderdom但是当前却没有data
+
+## css中的url
+*  background-image:url()
+*  动态绑定时出现的[问题1](https://blog.csdn.net/qq_32963841/article/details/81512044) [2](https://blog.csdn.net/qq_35393869/article/details/80333564)

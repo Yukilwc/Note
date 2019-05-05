@@ -32,3 +32,8 @@
 * `resolve(value1)`只能填写一个值，其他会被忽略，之后的then中可以接收`.then(value1=>console.log(value1));`
 * 回调地狱与promise的方法比较
 * promise原理机制
+
+## 获取数量
+* 对象
+* 数组
+

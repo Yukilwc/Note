@@ -80,10 +80,13 @@
 	* pointer,手指
 
 ## 怎样画出好看的边框
+* 阴影法:box-shadow
+	* 设置`box-shadow:1px 1px 10px 5px rgba(0, 0, 0, 0.1);`
+	* [detail](https://www.cnblogs.com/sapho/p/5481257.html)
 
 ## CSS动画与过度
 * transition:
-* display与Transition的冲突
+* display与Transition的冲突:当display：none；时，是无法设置过度的。可以改成visibility
 
 ## 制作光圈散开的提示效果
 
@@ -91,3 +94,30 @@
 
 
 ## 图片框组件设计：截取类，缩略类
+* 截取类：
+	* `background-image:url("../test/TestImg/1.jpg");`这里在vue中，写为基于组件的相对地址，在编译后，会去掉地址中的相对部分，图片名前加上publicpath，变成`url(/static/img/1.4e14dc7.jpg)`
+    * `background-repeat:no-repeat;`
+    * `background-position:left top;`表示对齐方式，图片与容器左边对齐，上边对齐
+    * `background-size:cover;`让图片覆盖容器
+    * 情景：使用i标签制作小图标
+
+## 使用id与class的选择
+* id是独一无二的，class是超过一个的
+* 在独立组件开发中，用class，因为独立组件会实例化多个
+* 在页面组件中，可以用id，因为一个页面
+
+## 文本的配置
+* font-size
+* font-weight
+* color
+* white-space:nowrap
+* overflow:hiden
+
+
+## ::after ::before
+* 使用情景
+* 使用方法
+
+## 鼠标悬停，图片等比放大
+* `transform:scale(1.1);`
+* `transition:transform 0.3s`

@@ -205,6 +205,30 @@
 	* 放在created阶段即可，需要将生命周期用到的数据初始化，防止undefined。注意获取的数据不可放在组件的data，因为此时data并未加载
 	* 必然出现，vue需要renderdom但是当前却没有data
 
+## vue全局变量
+*  `Vue.prototype.GLOBAL = global；`
+
 ## css中的url
 *  background-image:url()
 *  动态绑定时出现的[问题1](https://blog.csdn.net/qq_32963841/article/details/81512044) [2](https://blog.csdn.net/qq_35393869/article/details/80333564)
+*  在style标签中的css，使用background-image:
+*	html内联样式
+*	html动态切换样式
+*	发现的
+	*	对于使用v-bind绑定的样式中的url，webpack的loader不会做处理
+		*	`:style="{'background-image':imgUrl}"`
+		*	`imgUrl:url("../assets/loading.gif")`
+		*	前端工程获取的是`http://localhost:8080/assets/loading.gif`
+		*	也就是，通过css设定的图片，会被url-loader打包近制定目录，并将路径替换为正确绝对路径
+		*	而通过js直接引入的图片，则不会被url-loader打包，会保持原样，维持一个工程路径，而不是打包后的路径，在前端浏览器的static/img文件夹中，根本不会出现此图片
+	* 在js中引入图片，需要用`"url("+require("../assets/loading.gif")+")";`
+		* 这仅仅适用于路径是一个静止路径，不能使用动态路径变量
+		* 推测，require的执行发生在服务器端打包过程，此时vue并未实例化，也就没有数据，在require中使用vue的data，自然无法找到此模块。因此，图片路径只能填写，在工程目录下，可以找到的路径，而不能是动态路径。
+	* 因此图片资源分为两种
+		* 一种是静态的，在服务器打包是，进入dist/static/img文件夹的。例如，各种不变的图标，logo
+		* 一种是动态的，并不会进入服务器打包流程，也不存在于dist文件夹，它从数据库，从js文件流获取，发送到前端。例如，登陆后的头像，每日刷新的图片排行榜。这些是不能打包的。
+	* 关于动态图片的解决方案
+		* 1 把动态图片资源放在static文件夹下，此文件夹即便没有主动引入，也会被拷贝一份进入打包后文件。在CopyWebpackPlugin中配置
+		* 2 如此，前端从后端获取绝对的图片路径，注入到url中
+
+## static文件夹和assets文件夹中的图片，使用情景

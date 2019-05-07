@@ -19,3 +19,8 @@
 ## UserManager practice
 * `npm init` can create package.json
 * Service modules,Index modules
+
+## 目录问题
+* __dirname
+* process.
+* vuecli中的@

@@ -232,3 +232,16 @@
 		* 2 如此，前端从后端获取绝对的图片路径，注入到url中
 
 ## static文件夹和assets文件夹中的图片，使用情景
+
+## npm run build
+* 编译前清除dist
+* 去除dist中冗余的map文件
+* 生产环境与开发环境的路径问题
+* 这个过程，webpack给assets中的图片如何处理路径？
+	* 生产环境，即production，publicpath被配置为：config.build.assetsPublicPath，其值为'/',
+	* 生产环境，也就是build，处理图片路径的url-loader，name配置为：config.build.assetsSubDirectory(值为'static')+'img/[name].[hash:7].[ext]'
+	* 生产环境，output的path配置为config.build.assetsRoot（值为../dist）,其负责输出js，不影响图片路径
+	* 结论，build过程中，出现的图片url，配替换路径为：/static/img/namehash.jpg
+	* 因此，生成的dist中的static文件夹，必须放在express工程中的public文件夹下面，才能保证图片顺利获取。
+* static中的图片路径如何和生产中统一？
+

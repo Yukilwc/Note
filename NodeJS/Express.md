@@ -27,5 +27,6 @@
 		* `var history=require('connect-history-api-fallback');`
 		* `app.use(history());`
 		* `app.use(express.static(path.join(__dirname, 'public')));`此配置已必须在history()配置之后！！
+		* 参考[1](https://blog.csdn.net/qq846294282/article/details/78771673) [2](https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90) [3](https://github.com/bripkens/connect-history-api-fallback)
 
 ## express断点调试

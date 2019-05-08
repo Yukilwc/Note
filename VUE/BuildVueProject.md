@@ -101,6 +101,7 @@
 * 本地：`npm install vuex --save-dev`
 * 全局`npm install vuex --global`
 * 设置/获取全局安装的路径`npm config set/get prefix`
+* 全局安装仅是为了在命令行中使用，例如express-generator。不在命令行用，不需要全局安装，那样并不能改变packagejson
 
 
 ## vue路由跳转
@@ -140,6 +141,7 @@
 	* data引用store.state.info,当info变化时，data作为引用，并没有发生变化，并不会追踪依赖。
 	* computed会追踪依赖，检测到其引用的数据本体变化时，则会触发重新计算。
 	* 那data设计的职责是什么？它的设计目标就是保存组件的局部状态数据而已
+* vue-cli跨域代理服务修改后，需要重新npm run dev
 
 ## vue文件中的注释
 * html:<!--   -->
@@ -245,3 +247,8 @@
 	* 因此，生成的dist中的static文件夹，必须放在express工程中的public文件夹下面，才能保证图片顺利获取。
 * static中的图片路径如何和生产中统一？
 
+## vuex的store实例中，this不指向Vue，导致全局变量无法生效
+* 调用全局变量时 从vue.$api改为vue.prototype.$api
+* 需要先导入vue
+
+## vue模块和vue实例化对象，有何区别？也就是函数声明和构造？

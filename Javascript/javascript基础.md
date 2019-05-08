@@ -21,6 +21,7 @@
 	* `let bar = { a: 1, b: 2 };let baz = { ...bar }; // { a: 1, b: 2 }`
 	* 常用作拷贝
 	* 注意运算结果需要加花括号才行`this.imgInfos={...infos};`
+	* vue中，...运算符的使用情景？
 ## promise的使用
 * [detail](https://www.cnblogs.com/sweeeper/p/8442613.html)
 * `new promise(function(resolve,reject){AsyncAction{resolve()} })`
@@ -37,3 +38,5 @@
 * 对象
 * 数组
 
+## js模板字符串语法[参考](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
+* `反引号abc${expression}e反引号`可以直接取到表达式的值，拼接到字符串上，而不需要用 + 号连接。

@@ -237,6 +237,8 @@
 
 ## npm run build
 * 编译前清除dist
+	* 使用插件clean-webpack-plugin
+	* [参考](https://www.jianshu.com/p/5fd370de2df8)
 * 去除dist中冗余的map文件
 * 生产环境与开发环境的路径问题
 * 这个过程，webpack给assets中的图片如何处理路径？
@@ -252,3 +254,10 @@
 * 需要先导入vue
 
 ## vue模块和vue实例化对象，有何区别？也就是函数声明和构造？
+
+## 解决跨域问题、
+* 本地代理服务器
+	* [detail](https://segmentfault.com/a/1190000011007043)
+* [CORS跨域](https://www.cnblogs.com/sloong/p/cors.html)
+	* [detail](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
+	* 对比jsonp

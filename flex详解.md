@@ -1,0 +1,26 @@
+## 使用场景
+## 解决的问题
+* 旧时代的布局
+  * float
+  * display
+  * position
+  * 三者共同主导布局，导致复杂布局兼容性差。
+
+## 使用方法
+* 行内元素，块元素都可以设定flex
+* flex容器中的float，clear，vertical-align都将失效
+* 分水平轴与垂直轴，默认按水平方向排列。
+* 作用于所有成员的，在容器上设定的
+  * flex-direction
+  * flex-wrap
+  * flex-flow
+  * justify-content
+  * align-items
+  * align-content
+* 每一个成员的单独属性：
+  * order
+  * flex-grow
+  * flex-shrink
+  * flex-basis
+  * flex
+  * align-self

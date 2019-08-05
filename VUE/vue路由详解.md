@@ -1,0 +1,40 @@
+# hash路由
+## 原理
+* url中带有 # 标记，监听标记后面的变化，进行路由跳转
+## 优缺点
+* 优点
+  * 兼容性强
+* 缺点
+  * 不够美观
+  * 更像是hack，而非标准
+## 实现思想
+### 知识点
+* 在浏览器获取hash：`location.hash.slice(1)`
+### 思想
+* 构成要素：
+  * routes{}:维护多个路由，key是路由hash名，value时对应的一个callback
+  * route(path,callback)：添加新路由
+  * refresh:获取当前路由的hash，然后调用routes中的对应callback
+  * 事件监听
+    * load事件
+    * hashchange事件
+  * 后退功能
+    * 需要自己实现，设定history来存储所有路由，很不方便
+
+# history路由
+## 原理
+* 使用浏览器提供的History API
+## 优缺点
+## 实现思想
+### 知识点
+* 常见api
+  * window.history.back
+  * window.history.forward
+  * window.history.go
+  * 三个方法均会触发popstate事件
+  * window.history.replaceState
+  * window.history.pushState
+  * 上面两个向历史中添加或替换记录，并不触发跳转，也不触发popstate事件
+### 思想
+* vue-router监听popstate事件
+* 触发事件时，拿到path，去routes调用对应的callback

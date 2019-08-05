@@ -69,6 +69,8 @@
 * 数组
   * for
   * foreach
+* 对象
+  * Object.keys
 ### 正则表达式
 * reg.exec()返回值
   * result[0]匹配的字符串

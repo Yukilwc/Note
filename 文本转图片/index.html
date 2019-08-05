@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+</head>
+<body>
+    <div id="app">
+        <!-- <span>{{name}}</span>
+        {{name}}test{{title}}
+        <div>
+            test{{name}}
+            <span>
+                {{name}}
+            </span>
+			<input \>
+        </div> -->
+        <div class='edit' contenteditable="true">
+            <div contenteditable="true" disabled>test</div>
+            <img src='./1.png' />
+            <!-- <canvas id="canvas" width=40px height=30px></canvas> -->
+            <img class='canvasImg' src='' />
+        </div>
+    </div>
+    <!-- 文本区域，字符串变量，发送的消息
+    用户操作文本区域
+    客户端解析发送的消息
+    用户输入文字
+    用户插入表情
+    用户插入股票
+    用户回复
+    用户删除上述
+
+    用户进行一切的操作，都优先作用于文本区域，因为存在增删改粘贴等，难以用字符串同步
+    插入股票，用户选择插入，则就以特殊格式插入文本区域，这里的方案是插入a标签
+     -->
+
+    <!-- <script src="./test.js"></script> -->
+    <script>
+        let container = document.querySelector('.edit')
+        let anode = document.createElement('div')
+        anode.appendChild(document.createTextNode('stockname'))
+        container.appendChild(anode)
+        let domText = `<p>测试例子<p>`;
+// var canvas = document.getElementById("canvas")
+var canvas = document.createElement('canvas');
+canvas.width = 50
+canvas.height = 30
+var context = canvas.getContext("2d");
+// 设置字体
+context.font = "18px bold 黑体";
+// 设置颜色
+context.fillStyle = "#ff0";
+// 设置水平对齐方式
+context.textAlign = "center";
+// 设置垂直对齐方式
+context.textBaseline = "middle";
+// 绘制文字（参数：要写的字，x坐标，y坐标）
+context.fillText("这时文字", 10, 10);
+let dataUrl = canvas.toDataURL('image/png')
+console.log('dataurl',dataUrl)
+let imgnode = document.querySelector('.canvasImg')
+imgnode.src = dataUrl
+    </script>
+</body>
+<style>
+.edit {
+    width: 300px;
+    height: 500px;
+    background:gray
+}
+img{
+    width:50px;
+    height: 30px
+}
+</style>
+</html>

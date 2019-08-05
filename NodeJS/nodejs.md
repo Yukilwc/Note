@@ -24,3 +24,10 @@
 * __dirname
 * process.
 * vuecli中的@
+
+## 全局变量process
+### 属性
+* argv
+### 方法
+* cwd
+* nextTick
